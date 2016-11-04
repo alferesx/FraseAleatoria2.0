@@ -7,9 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.lang.reflect.Array;
-import java.util.Random;
-
 public class MainActivity extends AppCompatActivity {
     //Criar os componentes visuais
     private EditText mpalavra1;
@@ -23,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //Instanciar os componentes visuais
         mpalavra1 = (EditText) findViewById(R.id.editText_main_palavra1);
         mpalavra2 = (EditText) findViewById(R.id.editText_main_palavra2);
@@ -38,12 +36,10 @@ public class MainActivity extends AppCompatActivity {
                 palavras[1]=mpalavra2.getText().toString();
                 palavras[2]=mpalavra3.getText().toString();
                 palavras[3]=mpalavra4.getText().toString();
-                Random random = new Random();
-                int fraseAleatoria = random.nextInt(4);
-                Intent intent = new Intent(getApplicationContext(),ResultadoActivity.class);
-                intent.putExtra("palavras",palavras);
-                startActivity(intent);
 
+                Intent intent = new Intent(MainActivity.this, ResultadoActivity.class);
+                intent.putExtra("palavras", palavras);
+                startActivity(intent);
             }
         });
 

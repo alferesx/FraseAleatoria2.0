@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Random;
+
 public class ResultadoActivity extends AppCompatActivity {
     private EditText mresultado;
     private Button mvoltar;
@@ -17,9 +19,10 @@ public class ResultadoActivity extends AppCompatActivity {
 
         mresultado = (EditText) findViewById(R.id.editText_resultado_resultado);
         mvoltar = (Button) findViewById(R.id.button_resultado_voltar);
-        Intent intent = getIntent();
-        String[] palavras1 = getIntent().getStringArrayExtra("palavras");
-        mresultado.setText(String.valueOf(palavras1[0])+(String.valueOf(palavras1[1]))+(String.valueOf(palavras1[2]))+(String.valueOf(palavras1[3])));
+
+        String[] palavras = getIntent().getStringArrayExtra("palavras");
+
+        mresultado.setText(embaralha(palavras));
         mvoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,5 +30,20 @@ public class ResultadoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private String embaralha(String[] palavras) {
+        int tamanho = palavras.length;
+
+        Random random = new Random(System.currentTimeMillis());
+
+        StringBuffer frase = new StringBuffer();
+        for (int i = 0; i < tamanho; i++) {
+            frase
+                .append(palavras[random.nextInt(tamanho)])
+                .append(" ");
+        }
+
+        return frase.toString().trim();
     }
 }
